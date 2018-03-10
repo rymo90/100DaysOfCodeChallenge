@@ -1,30 +1,23 @@
-import copy
-a = [["redwan",7],["hashim",9], ["amal",6], ["kemer", 4], ["yassin", 5], ["anwar", 0], ["jemal",4]]
-max = 0
-b= copy.copy(a)
-for value in range(len(a)):
-
-    if max < a[value][1]:
-        max = a[value][1]
-for j in range(len(b)):
-    b[j][0] = ""
-    b[j][1]= 0  
-def d_c(a, max,b):
-    print("original list", a)
-    print("non original list", b)
-    count = [0] *( max +1 )
+unsortedList = [["redwan",7],["hashim",9], ["amal",6], ["kemer", 1], ["yassin", 5], ["anwar", 0], ["jemal",4]]
+max =0
+sortedList = [["", 0]] *(len(unsortedList)+1) # make a copy of original list
+for i in range(len(unsortedList)):    # find max value in original list.
+    if max < unsortedList[i][1]:
+        max = unsortedList[i][1]
+        
+def d_c(unsortedList, max,sortedList): 
+    count = [0] *( max +1 ) # initiolize an array with with length of max and set it to  zero.
     temp= 0
-    for i in range(len(count)):
-        count[i] += temp
+    for j in range(len(unsortedList)): # set plus one for every accurent in original list .. 
+        count[unsortedList[j][1]] += 1  # = in count array with correspanding index.
+    for i in range(len(count)): # add previous value with current value in count.
+        count[i] += temp 
         temp = count[i]   
-    print("counter after", count)    
-    # print("loop value")
-    for i in range(len(a)-1,0, -1):
-        return_A_value = a[i][1]
-        # print(return_A_value)
-        return_count_value = count[return_A_value]
-        count[return_A_value]-=1
-        print(return_count_value)
-        b[return_count_value][1] = return_A_value
-    print(b)   
-d_c(a,max, b)
+    for i in range(len(unsortedList)-1,-1, -1): # satrt from last to first in original list
+        originalValue = unsortedList[i][1]       # take the key and valuefrom original and sett value  in index acount
+        originalKey = unsortedList[i][0]         
+        returnContIdex = count[originalValue]   # take the value of count and  set in sort list index. 
+        count[originalValue] -= 1               # set -1 after you return vaue of count
+        sortedList[returnContIdex] = [originalKey, originalValue ] # set the return valu of cunt and set it in index of sorted list
+        # and give key and value from original list
+d_c(unsortedList,max, sortedList)
