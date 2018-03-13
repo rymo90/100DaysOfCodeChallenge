@@ -1,35 +1,45 @@
-function convertToRoman(num) {
-  var rum = "";
-  var temp= 0;
-  if(num.length == 4){
-    arr4 = ["M","V","V⁻"];
-    temp = num[0];
-    if(temp < 5){
-      if(temp==4){
-        rum+=arr4[0]+arr4[1];
-      }else{
-        while (temp >0){
-          rum+= arr4[0];
-          temp -= 1;
+function convertToRom(num){
+    num = num.toString();  
+    var lng = num.length;
+    while(lng >= 1){
+        var rum = "";
+        var temp = num[0];
+        var obj = {
+            "1": ["I","V","X"],
+            "2": ["X","L","C"],
+            "3": ["C","D","M"],
+            "4": ["M","V","X⁻"]
+        };
+        if(obj[lng]){
+            if(temp < 5){
+                if(temp==4){
+                  rum+=obj[lng][0]+obj[lng][1];
+                }else{
+                  while (temp >0){
+                    rum+= obj[lng][0];
+                    temp -= 1;
+                  }
+                }
+              }else{
+                if(temp == 9){
+                  rum+= obj[lng][0]+obj[lng][2];
+                }else if(temp== 5){
+                  rum += obj[lng][1];
+                }else{
+                  rum += obj[lng][1];
+                  while (temp > 5){
+                    rum+= obj[lng][0];
+                    temp -= 1;
+                  }
+                }
+              }
+        }else{
+            continue;
         }
-        return rum;
-      }
-    }else{
-      if(temp == 9){
-        rum+= arr4[0]+arr4[2];
-      }else if(temp== 5){
-        rum += arr4[1];
-      }else{
-        rum += arr4[1];
-        while (temp > 5){
-          rum+= arr4[0];
-          temp -= 1;
-        }
-      }
+        
+        return rum + convertToRom(num.substr(1,num.length))
     }
-  }
- 
-
+    return ""
 }
-
-convertToRoman(3000);
+var result = convertToRom(343);
+console.log(result);
