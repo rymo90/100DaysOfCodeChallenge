@@ -1,5 +1,6 @@
-import Data.Char
 module F1 where
+  import Data.Char
+  -- tar imot int retunear int
   fib :: Integer -> Integer
   fib 0 = 0
   fib 1 = 1
@@ -20,9 +21,10 @@ module F1 where
     else [x]++karpsravor(xs)
   medellangd :: String -> Double
   medellangd x =1.0
+  medellangd (x:xs) = 
     let
-    coutnLetter = findLetter x
-    coutnWord = findWord x 0 0
+    coutnLetter = findLetter (x:xs)
+    coutnWord = findWord (x:xs) 0 0
     in coutnLetter / coutnWord
   findLetter :: String -> Double
   findLetter "" = 0
@@ -36,9 +38,9 @@ module F1 where
   findWord (x:xs) word notWord  =
       if isLetter x
           then if notWord == 0
-              then word+ 1  +  medellengd xs word 1
-              else word + medellengd xs word notWord
-      else word + medellengd xs word 0
+              then word+ 1  +   findWord xs word 1
+              else word + findWord xs word notWord
+      else word + findWord xs word 0
   kyffla :: [a] -> [a]
   kyffla [] = []
   kyffla(x:xs) =
