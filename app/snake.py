@@ -22,3 +22,18 @@ class Snake(object):
         print (self.x + ' ' + foo)
 snake= Snake()
 snake.method_a('Says the snake')
+''' make a body object'''
+class Body(object):
+    """docstring for Body."""
+    def __init__(self, ):
+        self.x= "this is the"
+    def method_a(self, foo):
+        print(self.x + " "+ foo)
+body = Body().method_a("Body")
+''' #make Food Object '''
+class Food(object):
+    def __init__(self):
+        self.y = "Yum, Tasty"
+    def method_a(self,foo):
+        print(self.y + " " + foo)
+food = Food().method_a('Food')
